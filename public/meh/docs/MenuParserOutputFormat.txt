@@ -1,0 +1,46 @@
+var menuOptions = {
+	entreeMenus: [
+		{
+			menuName: '',
+			id: '',
+			type: '',
+			items: [
+				{
+					description: '',
+					id: '',
+					imageName: '', // igroup
+					ifat: '', // No idea what this is for
+					condimentIds: [ // Looks like each condiment group is specified by 2 characters.
+						'',
+						''
+					],
+					longDescription: '',
+					iextra: '' // Don't know about this one either
+				}
+			]
+		},
+		
+		{
+		  	...
+		},
+		
+		...
+	],
+	
+	// Don't know what you got going on down there, so
+	// I made a representation that better fits the data
+	condiments: [
+		{
+			id: '' // 2 letters
+			minSelection: '', 
+			maxSelection: '',
+			description: ''
+		},
+
+		{
+			...
+		},
+		
+		...
+	]
+};

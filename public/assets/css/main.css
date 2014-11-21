@@ -1,0 +1,8 @@
+#modal-signIn .modal-body { min-height: 230px; }
+#signIn-loading {
+  text-align: center;
+  color: #444;
+  display: none; }
+#signIn-error {
+  margin-bottom: 0px;
+  display: none; }

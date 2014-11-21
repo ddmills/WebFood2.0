@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang='en'>
+<head>
+<% include partials/head %>
+</head>
+<body>
+<% include partials/header %>
+<div class='container'>
+  <p> Hello? </p>
+  <p data-bind='text: User.name'></p>
+  <p data-bind='text: User.created'></p>
+  <p data-bind='text: User.id'></p>
+</div>
+<% include partials/footer %>
+</body>
+</html>
