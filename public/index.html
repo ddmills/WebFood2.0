@@ -138,8 +138,8 @@
 		  </div><!-- end modal-dialog -->
 		</div><!-- end modal -->
 	</div><!--end container-->
-	
-	<script><!-- Scripts to send JSON info-->
+	<!-- Scripts to send JSON info-->
+	<script> 
 		$(document).ready(function() {
 			$("#signinButton").click(function(e) {
 				$.post("/auth/login", {
@@ -151,7 +151,7 @@
 		
 		$(document).ready(function() {
 			$("#registerButton").click(function(e) {
-				$.post("/auth/login", {
+				$.post("/auth/register", {
 					username:$('#username').val(),
 					password:$('#password').val(),
 					repassword:$('#repassword').val(),

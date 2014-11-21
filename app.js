@@ -108,6 +108,9 @@ router.post('/auth/login', function(req, res, next) {
     if (!user) {
       return res.status(401).send();
     }
+    sess = req.session;
+    sess.user = user;
+    console.log(sess.user);
     req.user = user;
     req.logIn(user, function(err) {
       if (err) { return next(err); }
