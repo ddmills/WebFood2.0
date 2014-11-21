@@ -11,6 +11,11 @@ var OrderRepo = require('./data/order');
 
 var app = express();
 
+
+app.set('views', __dirname + '/public/views');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,7 +23,7 @@ app.use(cookieParser('uncreative-secret'));
 app.use(session({ secret: 'uncreative-secret', coookie: {httpOnly: false} }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 var initPassport = require('./auth/passport-setup');
 initPassport(passport);
@@ -35,6 +40,14 @@ var ensureAuthenticated = function(req, res, next) {
 var router = express.Router();
 
 /*
+ * Home page route
+ */
+router.get('/', function(req, res) {
+    res.render('index');
+});
+
+
+/*
  * GET /restricted
  *
  * Test if you are authenticated. Returns the user object stored in session, or a 401 Unauthorized error
@@ -44,6 +57,7 @@ router.get('/restricted', ensureAuthenticated, function(req, res) {
     debug('/restricted invoked');
     res.send({user: req.user});
 });
+
 
 /**
  * POST /api/create-order
@@ -136,6 +150,7 @@ router.post('/auth/login', function(req, res, next) {
 router.post('/auth/register', passport.registerUser);
 
 app.use(router);
+app.use(express.static(path.join(__dirname, 'public')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -160,13 +175,13 @@ if (typeof(process.env.DEBUG) !== 'undefined') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.send({
-        message: err.message,
-        error: {}
-    });
-});
+// app.use(function(err, req, res, next) {
+    // res.status(err.status || 500);
+    // res.send({
+        // message: err.message,
+        // error: {}
+    // });
+// });
 
 
 module.exports = app;
