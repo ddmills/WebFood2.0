@@ -7,13 +7,16 @@
   <% include partials/header %>
   <!-- LOCATIONS VIEW -->
   <div id='view-locations' class='view container'>
-    <p> Hello? </p>
     <p data-bind='text: User.name'></p>
     <p data-bind='text: User.created'></p>
     <p data-bind='text: User.id'></p>
-    <div data-bind='foreach: Data.locations'>
-      <p data-bind='text: name'></p>
+    <!-- ko foreach: Data.locationRows -->
+    <div class='row' data-bind='foreach: $data'>
+      <div class='col-sm-3'>
+        <p data-bind='text: name'></p>
+      </div>
     </div>
+    <!-- /ko -->
   </div><!-- /LOCATIONS VIEW -->
 
   <!-- MENUS VIEW -->
