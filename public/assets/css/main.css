@@ -6,3 +6,5 @@
 #signIn-error {
   margin-bottom: 0px;
   display: none; }
+.view { display: none; }
+.view-active { display: block; }

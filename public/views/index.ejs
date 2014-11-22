@@ -1,16 +1,31 @@
 <!doctype html>
 <html lang='en'>
 <head>
-<% include partials/head %>
+  <% include partials/head %>
 </head>
 <body>
-<% include partials/header %>
-<div class='container'>
-  <p> Hello? </p>
-  <p data-bind='text: User.name'></p>
-  <p data-bind='text: User.created'></p>
-  <p data-bind='text: User.id'></p>
-</div>
-<% include partials/footer %>
+  <% include partials/header %>
+  <!-- LOCATIONS VIEW -->
+  <div id='view-locations' class='view container'>
+    <p> Hello? </p>
+    <p data-bind='text: User.name'></p>
+    <p data-bind='text: User.created'></p>
+    <p data-bind='text: User.id'></p>
+    <div data-bind='foreach: Data.locations'>
+      <p data-bind='text: name'></p>
+    </div>
+  </div><!-- /LOCATIONS VIEW -->
+
+  <!-- MENUS VIEW -->
+  <div id='view-menus' class='view container'>
+    <p> Menu view </p>
+  </div><!-- /MENUS VIEW -->
+
+  <!-- ITEMS VIEW -->
+  <div id='view-items' class='view container'>
+    <p> Items view </p>
+  </div><!-- /ITEMS VIEW -->
+
+  <% include partials/footer %>
 </body>
 </html>

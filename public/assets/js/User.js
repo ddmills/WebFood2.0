@@ -25,6 +25,7 @@ function User() {
       self.logged  (true);
     });
 
+    /* return the promise from ajax request */
     return promise;
   }
 }
