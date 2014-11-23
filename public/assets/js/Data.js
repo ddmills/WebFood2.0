@@ -36,6 +36,8 @@ function Data() {
   self.getMenu = function(location) {
     ParseData.getMenu(location).then(function(data) {
       console.log(data);
+      self.menu.entrees.removeAll();
+      self.menu.sides.removeAll();
       data.entreeMenus.forEach(function(val) {
         self.menu.entrees.push(val);
       });
