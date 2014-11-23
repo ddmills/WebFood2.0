@@ -1,5 +1,5 @@
 /* knockout viewmodel */
-vm = {
+var vm = {
   User      : new User(),
   Views     : new Views(),
   Data      : new Data()

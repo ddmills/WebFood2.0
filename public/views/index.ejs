@@ -5,15 +5,29 @@
 </head>
 <body>
   <% include partials/header %>
+
   <!-- LOCATIONS VIEW -->
   <div id='view-locations' class='view container'>
-    <p data-bind='text: User.name'></p>
-    <p data-bind='text: User.created'></p>
-    <p data-bind='text: User.id'></p>
+    <h3> Select a location &hellip; </h3>
     <!-- ko foreach: Data.locationRows -->
     <div class='row' data-bind='foreach: $data'>
-      <div class='col-sm-3'>
-        <p data-bind='text: name'></p>
+      <div class='col-sm-4'>
+        <div class='panel panel-info'>
+          <!-- LOCATION HEADER -->
+          <div class='panel-heading'>
+            <h3 class='panel-title' data-bind='text: name'></h3>
+          </div>
+          <!-- LOCATION INFORMATION -->
+          <div class='panel-body'>
+
+          </div>
+          <!-- LOCATION FOOTER -->
+          <div class='panel-footer'>
+            <button class='btn btn-default btn-block' type='button' data-bind='click: function() { $root.Views.showMenu(id); }'>
+              Menu/Order <i class='fa fa-fw fa-arrow-circle-right'></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <!-- /ko -->
@@ -21,7 +35,8 @@
 
   <!-- MENUS VIEW -->
   <div id='view-menus' class='view container'>
-    <p> Menu view </p>
+    <p> Menu view: </p>
+    <pre data-bind='text: Data.menu.entrees'></pre>
   </div><!-- /MENUS VIEW -->
 
   <!-- ITEMS VIEW -->
