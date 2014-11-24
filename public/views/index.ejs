@@ -40,9 +40,9 @@
     <div class='row'>
       <div class='col-sm-3'>
         <div class='list-group'>
-          <a href='#' class='list-group-item active'>All Items</a>
+          <a href='#' class='list-group-item active' data-bind='click: function() { $root.Data.selectSubmenu(-1); }'>All Items</a>
           <!-- ko foreach: Data.menu.submenu -->
-          <a href='#' class='list-group-item' data-bind='text: menuName'></a>
+          <a href='#' class='list-group-item' data-bind='text: menuName, click: function() { $root.Data.selectSubmenu($index()); }'></a>
           <!-- /ko -->
         </div>
       </div>

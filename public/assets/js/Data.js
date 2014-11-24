@@ -57,16 +57,15 @@ function Data() {
 
   self.selectSubmenu = function(indx) {
     self.menu.items.removeAll();
-    if (indx = -1) {
+    if (indx == -1) {
       self.menu.submenu().forEach(function(val) {
-        console.log(val);
         val['items'].forEach(function(d) {
           self.menu.items.push(d);
         });
       });
     } else {
       var sub = self.menu.submenu()[indx];
-      sub.forEach(function(val) {
+      sub['items'].forEach(function(val) {
         self.menu.items.push(val);
       });
     }
