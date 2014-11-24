@@ -19,7 +19,9 @@
           </div>
           <!-- LOCATION INFORMATION -->
           <div class='panel-body'>
-
+            <ul class='hours-list' data-bind='foreach: hours'>
+              <li data-bind='text: $data'></li>
+            </ul>
           </div>
           <!-- LOCATION FOOTER -->
           <div class='panel-footer'>

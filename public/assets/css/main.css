@@ -8,3 +8,12 @@
   display: none; }
 .view { display: none; }
 .view-active { display: block; }
+.hours-list {
+  margin: 0;
+  padding: 0; }
+.hours-list li {
+  padding: 4px 15px;
+  position: relative;
+  display: block;
+  list-style: none;
+  border: none; }

@@ -22,6 +22,27 @@ function Data() {
   /* parse the locations xml */
   ParseData.getLocations().then(function(data) {
     data.forEach(function(val) {
+      var hours = [];
+      var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+      /* populate all seven days */
+      for (var i = 0; i < 7; i++) {
+        found = false;
+        for (var j = 0; j < 7; j++) {
+          if (val.hours[j]) {
+            var inf_day = val.hours[j].substr(0, 3);
+            if (inf_day == days[i]) {
+              hours.push(val.hours[j]);
+              found = true;
+              break
+            }
+          }
+        }
+        if (!found) { hours.push(days[i] + ': Closed'); }
+      }
+
+      val.hours = hours;
+
       self.locations.push(val);
     });
     console.log(data);
