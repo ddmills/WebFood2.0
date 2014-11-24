@@ -49,22 +49,43 @@ function Data() {
   });
 
   self.menu = {
-    'entrees' : ko.observableArray(),
-    'sides'   : ko.observableArray()
+    'submenu'  : ko.observableArray(),
+    'sides'    : ko.observableArray(),
+    'selected' : ko.observable(-1),
+    'items'    : ko.observableArray()
   };
+
+  self.selectSubmenu = function(indx) {
+    self.menu.items.removeAll();
+    if (indx = -1) {
+      self.menu.submenu().forEach(function(val) {
+        console.log(val);
+        val['items'].forEach(function(d) {
+          self.menu.items.push(d);
+        });
+      });
+    } else {
+      var sub = self.menu.submenu()[indx];
+      sub.forEach(function(val) {
+        self.menu.items.push(val);
+      });
+    }
+    self.menu.selected(indx);
+  }
 
   /* parse the menus xml */
   self.getMenu = function(location) {
     ParseData.getMenu(location).then(function(data) {
       console.log(data);
-      self.menu.entrees.removeAll();
+      self.menu.submenu.removeAll();
       self.menu.sides.removeAll();
       data.entreeMenus.forEach(function(val) {
-        self.menu.entrees.push(val);
+        self.menu.submenu.push(val);
       });
       data.condimentMenus.forEach(function(val) {
         self.menu.sides.push(val);
       });
+      self.selectSubmenu(-1);
     });
   }
 }
