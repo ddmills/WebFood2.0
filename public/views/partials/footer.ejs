@@ -22,3 +22,13 @@
 
 <!-- CONTROLLERS -->
 <script src='assets/js/ModalControllers.js'></script>
+
+<!-- THIS SHOULD ONLY BE INCLUDED IF THE USER IS LOGGED IN ON NODE
+     CHECK THIS BY LOOKING AT THE SESSION VARIABLES!  -->
+<script>
+  /* Pass the session variable instead of these hardcoded */
+  vm.User.name('dmills');
+  vm.User.id('123');
+  vm.User.created('2014');
+  vm.User.logged(true);
+</script>
