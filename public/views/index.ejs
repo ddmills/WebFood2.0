@@ -35,6 +35,19 @@
 
   <!-- MENUS VIEW -->
   <div id='view-menus' class='view container'>
+    <div class='row'>
+      <div class='col-sm-3'>
+        <div class='list-group'>
+          <a href='#' class='list-group-item active'>All Items</a>
+          <!-- ko foreach: Data.menu.entrees -->
+          <a href='#' class='list-group-item' data-bind='text: menuName'></a>
+          <!-- /ko -->
+        </div>
+      </div>
+      <div class='col-sm-9'>
+        food stuffs
+      </div>
+    </div>
     <p> Menu view: </p>
     <pre data-bind='text: Data.menu.entrees'></pre>
   </div><!-- /MENUS VIEW -->
