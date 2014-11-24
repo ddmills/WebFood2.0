@@ -2,8 +2,10 @@
  * A script that handles data from the Service module
  * This includes the Locations, Menus, and Items
  */
-function Data() {
+function Data(vm) {
   var self = this;
+
+  console.log(vm.location());
   /* arrays of web food data */
   self.locations = ko.observableArray();
   self.items     = ko.observableArray();
@@ -73,7 +75,9 @@ function Data() {
   }
 
   /* parse the menus xml */
-  self.getMenu = function(location) {
+  vm.location.subscribe(function(newval) {
+    var location = newval;
+    console.log(location);
     ParseData.getMenu(location).then(function(data) {
       console.log(data);
       self.menu.submenu.removeAll();
@@ -86,5 +90,5 @@ function Data() {
       });
       self.selectSubmenu(-1);
     });
-  }
+  });
 }
