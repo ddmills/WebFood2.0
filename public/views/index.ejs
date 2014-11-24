@@ -5,73 +5,74 @@
 </head>
 <body>
   <% include partials/header %>
-
-  <!-- LOCATIONS VIEW -->
-  <div id='view-locations' class='view container'>
-    <h3> Select a location &hellip; </h3>
-    <!-- ko foreach: Data.locationRows -->
-    <div class='row' data-bind='foreach: $data'>
-      <div class='col-sm-4'>
-        <div class='panel panel-info'>
-          <!-- LOCATION HEADER -->
-          <div class='panel-heading'>
-            <h3 class='panel-title' data-bind='text: name'></h3>
-          </div>
-          <!-- LOCATION INFORMATION -->
-          <div class='panel-body'>
-            <ul class='hours-list' data-bind='foreach: hours'>
-              <li data-bind='text: $data'></li>
-            </ul>
-          </div>
-          <!-- LOCATION FOOTER -->
-          <div class='panel-footer'>
-            <button class='btn btn-default btn-block' type='button' data-bind='click: function() { $root.Views.showMenu(id); }'>
-              Menu/Order <i class='fa fa-fw fa-arrow-circle-right'></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /ko -->
-  </div><!-- /LOCATIONS VIEW -->
-
-  <!-- MENUS VIEW -->
-  <div id='view-menus' class='view container'>
-    <div class='row'>
-      <div class='col-sm-3'>
-        <div class='list-group'>
-          <a href='#' class='list-group-item active' data-bind='click: function() { $root.Data.selectSubmenu(-1); }'>All Items</a>
-          <!-- ko foreach: Data.menu.submenu -->
-          <a href='#' class='list-group-item' data-bind='text: menuName, click: function() { $root.Data.selectSubmenu($index()); }'></a>
-          <!-- /ko -->
-        </div>
-      </div>
-      <div class='col-sm-9'>
-        <!-- ko foreach: Data.menu.items -->
-        <div class='panel panel-default submenu-item'>
-          <div class='panel-heading'><h3 class='panel-title' data-bind='text: description'></h3></div>
-          <div class='panel-body'>
-            <div class='media'>
-              <div class='media-left'>
-                <img data-bind='attr: { src: "https://iastate.webfood.com/admin/images/uploaded/" + imageName + ".png" }'>
-              </div>
-              <div class='media-body'>
-                <h5 class='media-heading main-menu-item-cost' data-bind='text: "$"+cost'></h5>
-                <div class='main-menu-item-description' data-bind='text: longDescription'></div>
-              </div>
+  <div class='container'>
+    <!-- LOCATIONS VIEW -->
+    <div data-bind='page: { id: "start", title: "Webfoods 2.0"}'>
+      <h3> Select a location &hellip; </h3>
+      <!-- ko foreach: Data.locationRows -->
+      <div class='row' data-bind='foreach: $data'>
+        <div class='col-sm-4'>
+          <div class='panel panel-info'>
+            <!-- LOCATION HEADER -->
+            <div class='panel-heading'>
+              <h3 class='panel-title' data-bind='text: name'></h3>
+            </div>
+            <!-- LOCATION INFORMATION -->
+            <div class='panel-body'>
+              <ul class='hours-list' data-bind='foreach: hours'>
+                <li data-bind='text: $data'></li>
+              </ul>
+            </div>
+            <!-- LOCATION FOOTER -->
+            <div class='panel-footer'>
+              <a class='btn btn-default btn-block' data-bind='attr: {href: "#menus?location="+id}'>
+                Menu/Order <i class='fa fa-fw fa-arrow-circle-right'></i>
+              </a>
             </div>
           </div>
         </div>
-        <!-- /ko -->
       </div>
-    </div>
-  </div><!-- /MENUS VIEW -->
+      <!-- /ko -->
+    </div><!-- /LOCATIONS VIEW -->
 
-  <!-- ITEMS VIEW -->
-  <div id='view-items' class='view container'>
-    <p> Items view </p>
-  </div><!-- /ITEMS VIEW -->
+    <!-- MENUS VIEW -->
+    <div data-bind='page: { id: "menus", params: ["location"], title: "Webfoods 2.0 - Menus", fx: "slide", scrollToTop: true, afterShow: function() { Data.getMenu(location); }}'>
+      <p data-bind='text: location'></p>
+      <div class='row'>
+        <div class='col-sm-3'>
+          <div class='list-group'>
+            <a href='#' class='list-group-item active' data-bind='click: function() { $root.Data.selectSubmenu(-1); }'>All Items</a>
+            <!-- ko foreach: Data.menu.submenu -->
+            <a href='#' class='list-group-item' data-bind='text: menuName, click: function() { $root.Data.selectSubmenu($index()); }'></a>
+            <!-- /ko -->
+          </div>
+        </div>
+        <div class='col-sm-9'>
+          <!-- ko foreach: Data.menu.items -->
+          <div class='panel panel-default submenu-item'>
+            <div class='panel-heading'><h3 class='panel-title' data-bind='text: description'></h3></div>
+            <div class='panel-body'>
+              <div class='media'>
+                <div class='media-left'>
+                  <img data-bind='attr: { src: "https://iastate.webfood.com/admin/images/uploaded/" + imageName + ".png" }'>
+                </div>
+                <div class='media-body'>
+                  <h5 class='media-heading main-menu-item-cost' data-bind='text: "$"+cost'></h5>
+                  <div class='main-menu-item-description' data-bind='text: longDescription'></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div><!-- /MENUS VIEW -->
 
+    <!-- ORDER VIEW -->
+    <div data-bind='page: { id: "order", title: "Webfoods 2.0 - order"}'>
+      <p> order view </p>
+    </div><!-- /ORDER VIEW -->
+  </div>
   <% include partials/footer %>
 </body>
 </html>

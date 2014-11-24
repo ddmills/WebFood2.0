@@ -4,4 +4,6 @@ var vm = {
   Views     : new Views(),
   Data      : new Data()
 };
+pager.extendWithPage(vm);
 ko.applyBindings(vm);
+pager.start();

@@ -32,5 +32,5 @@ function Views() {
   }
 
   /* show the current view */
-  self.show(self.current());
+  // self.show(self.current());
 }
