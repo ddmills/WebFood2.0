@@ -6,6 +6,17 @@
 #signIn-error {
   margin-bottom: 0px;
   display: none; }
+#modal-register .modal-body { min-height: 230px; }
+#register-loading {
+  text-align: center;
+  color: #444;
+  display: none; }
+#register-error {
+  margin-bottom: 0px;
+  display: none; }
+#register-error-2 {
+  margin-bottom: 0px;
+  display: none; }
 .view { display: none; }
 .view-active { display: block; }
 .hours-list {

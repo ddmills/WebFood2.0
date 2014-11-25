@@ -91,13 +91,13 @@
 				<form role="form">
 					<!--Email input box-->
 					<div class="form-group">
-						<label for="signIn-username">User Name:</label>
+						<label for="username">User Name:</label>
 						<input type="username" class="form-control" id="signIn-username" placeholder="Enter username">
 					</div>
 
 					<!--Password input box-->
 					<div class="form-group">
-						<label for="signIn-password">Password:</label>
+						<label for="password">Password:</label>
 						<input type="password" class="form-control" id="signIn-password" placeholder="Enter password">
 					</div>
 
@@ -151,9 +151,10 @@
 
 		$(document).ready(function() {
 			$("#registerButton").click(function(e) {
+				console.log("Register Button");
 				$.post("/auth/register", {
-					username:$('#username').val(),
-					password:$('#password').val(),
+					username:$('#signIn-username').val(),
+					password:$('#signIn-password').val(),
 					repassword:$('#repassword').val(),
 				});
 			});

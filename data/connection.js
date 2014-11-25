@@ -17,7 +17,7 @@ debug('Connecting to database...');
  */
 module.exports = function (cb) {
 	if (!db) {
-		mongodb.connect('mongodb://jbertram:password1@ds051110.mongolab.com:51110/se329p3', function(err, result) {
+		mongodb.connect('mongodb://webfoods:webfoods@ds053380.mongolab.com:53380/webfood2', function(err, result) {
 			if (err) {
 				debug('error: ', err);
 				cb(err);

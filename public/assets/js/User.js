@@ -28,4 +28,15 @@ function User() {
     /* return the promise from ajax request */
     return promise;
   }
+  
+  self.register = function(username, password, repassword) {
+    var promise = $.post('/auth/register', {
+      'username': username,
+      'password': password,
+      'repassword': repassword
+    });
+
+    /* return the promise from ajax request */
+    return promise;
+  }
 }
