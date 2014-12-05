@@ -4,22 +4,44 @@
  */
 function Data(vm) {
   var self = this;
-
-  console.log(vm.location());
+  var empty = {
+    description     : 'loading',
+    imageName       : 'loading',
+    condimentIds    : [],
+    longDescription : '',
+    id              : '-1'
+  }
   /* arrays of web food data */
-  self.locations = ko.observableArray();
-  self.items     = ko.observableArray();
-  self.menus     = ko.observableArray();
+  self.locations  = ko.observableArray();
+  self.items      = ko.observableArray();
+  self.menus      = ko.observableArray();
+  self.condiments = ko.observableArray();
+  self.curItem    = ko.observable(empty);
+  self.curCond    = ko.observableArray();
 
+  self.selectItem = function(item) {
+    console.log(item)
+    self.curItem(item);
+    self.getCondiments(self.curItem().condimentIds);
+  }
+
+  /* Split location array into rows of 2 */
   self.locationRows = ko.computed(function() {
     var locations = self.locations();
     var result = [];
     for (var i = 0; i < locations.length; i += 2) {
       result.push(locations.slice(i, i+2));
     }
-    console.log(result);
     return result;
   });
+
+  self.getCondiments = function(condArray) {
+    // var conds = self.condiments();
+    self.curCond(self.condiments().filter(function(ele) {
+      return (condArray.indexOf(ele.id.toUpperCase()) > -1);
+    }));
+    console.log(self.curCond());
+  }
 
   /* parse the locations xml */
   ParseData.getLocations().then(function(data) {
@@ -47,23 +69,19 @@ function Data(vm) {
     });
   });
 
-  self.menu = ko.observableArray();
-  self.condiments = ko.observableArray();
-
-  /* parse the menus xml */
+  /* Change the menu whenever the selected location changes */
   vm.location.subscribe(function(newval) {
     var location = newval;
     self.condiments.removeAll();
-    self.menu.removeAll();
+    self.menus.removeAll();
     ParseData.getMenu(location).then(function(data) {
       data.entreeMenus.forEach(function(val) {
-        self.menu.push(val);
+        self.menus.push(val);
       });
       data.condimentMenus.forEach(function(val) {
         self.condiments.push(val);
       });
-      // self.selectSubmenu(-1);
-      console.log(self.menu());
+      console.log(self.condiments());
       $('img[data-failover]').error(function(){
         var failover = $(this).data('failover');
         if (this.src != failover){
