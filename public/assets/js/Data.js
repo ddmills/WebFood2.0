@@ -14,8 +14,8 @@ function Data(vm) {
   self.locationRows = ko.computed(function() {
     var locations = self.locations();
     var result = [];
-    for (var i = 0; i < locations.length; i += 3) {
-      result.push(locations.slice(i, i+3));
+    for (var i = 0; i < locations.length; i += 2) {
+      result.push(locations.slice(i, i+2));
     }
     console.log(result);
     return result;
@@ -42,53 +42,34 @@ function Data(vm) {
         }
         if (!found) { hours.push(days[i] + ': Closed'); }
       }
-
       val.hours = hours;
-
       self.locations.push(val);
     });
-    console.log(data);
   });
 
-  self.menu = {
-    'submenu'  : ko.observableArray(),
-    'sides'    : ko.observableArray(),
-    'selected' : ko.observable(-1),
-    'items'    : ko.observableArray()
-  };
-
-  self.selectSubmenu = function(indx) {
-    self.menu.items.removeAll();
-    if (indx == -1) {
-      self.menu.submenu().forEach(function(val) {
-        val['items'].forEach(function(d) {
-          self.menu.items.push(d);
-        });
-      });
-    } else {
-      var sub = self.menu.submenu()[indx];
-      sub['items'].forEach(function(val) {
-        self.menu.items.push(val);
-      });
-    }
-    self.menu.selected(indx);
-  }
+  self.menu = ko.observableArray();
+  self.condiments = ko.observableArray();
 
   /* parse the menus xml */
   vm.location.subscribe(function(newval) {
     var location = newval;
-    console.log(location);
+    self.condiments.removeAll();
+    self.menu.removeAll();
     ParseData.getMenu(location).then(function(data) {
-      console.log(data);
-      self.menu.submenu.removeAll();
-      self.menu.sides.removeAll();
       data.entreeMenus.forEach(function(val) {
-        self.menu.submenu.push(val);
+        self.menu.push(val);
       });
       data.condimentMenus.forEach(function(val) {
-        self.menu.sides.push(val);
+        self.condiments.push(val);
       });
-      self.selectSubmenu(-1);
+      // self.selectSubmenu(-1);
+      console.log(self.menu());
+      $('img[data-failover]').error(function(){
+        var failover = $(this).data('failover');
+        if (this.src != failover){
+          this.src = failover;
+        }
+      });
     });
   });
 }

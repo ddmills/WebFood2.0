@@ -11,7 +11,7 @@
       <h3> Select a location &hellip; </h3>
       <!-- ko foreach: Data.locationRows -->
       <div class='row' data-bind='foreach: $data'>
-        <div class='col-sm-4'>
+        <div class='col-sm-6'>
           <div class='panel panel-info'>
             <!-- LOCATION HEADER -->
             <div class='panel-heading'>
@@ -43,34 +43,44 @@
         title: "Webfoods 2.0 - Menus",
         fx: "slide",
         scrollToTop: true }'>
-      <div class='row'>
-        <div class='col-sm-3'>
-          <div class='list-group'>
-            <a href='#' class='list-group-item active' data-bind='click: function() { $root.Data.selectSubmenu(-1); }'>All Items</a>
-            <!-- ko foreach: Data.menu.submenu -->
-            <a href='#' class='list-group-item' data-bind='text: menuName, click: function() { $root.Data.selectSubmenu($index()); }'></a>
-            <!-- /ko -->
-          </div>
-        </div>
-        <div class='col-sm-9'>
-          <!-- ko foreach: Data.menu.items -->
-          <div class='panel panel-default submenu-item'>
-            <div class='panel-heading'><h3 class='panel-title' data-bind='text: description'></h3></div>
-            <div class='panel-body'>
-              <div class='media'>
-                <div class='media-left'>
-                  <img data-bind='attr: { src: "https://iastate.webfood.com/admin/images/uploaded/" + imageName + ".png" }'>
-                </div>
-                <div class='media-body'>
-                  <h5 class='media-heading main-menu-item-cost' data-bind='text: "$"+cost'></h5>
-                  <div class='main-menu-item-description' data-bind='text: longDescription'></div>
-                </div>
+      <!-- ko foreach: Data.menu -->
+      <h3 data-bind='text: menuName'></h3>
+        <!-- ko foreach: items -->
+        <div class='panel panel-default submenu-item'>
+          <div class='panel-heading'><h3 class='panel-title' data-bind='text: description'></h3></div>
+          <div class='panel-body'>
+            <div class='media'>
+              <div class='media-left'>
+                <img data-bind='attr: { src: imageName }' data-failover="/assets/img/placeholder.png" />
+              </div>
+              <div class='media-body'>
+                <div class='main-menu-item-description' data-bind='text: longDescription'></div>
               </div>
             </div>
           </div>
-          <!-- /ko -->
+          <div class='panel-footer'>
+            <a class='btn btn-default btn-block' href='#modal-order' data-toggle='modal'>Order Now <i class='fa fa-fw fa-arrow-circle-right'></i>
+            </a>
+          </div>
         </div>
-      </div>
+        <!-- /ko -->
+      <!-- /ko -->
+
+      <!-- ko foreach: Data.menu.items -->
+      <!-- <div class='panel panel-default submenu-item'>
+        <div class='panel-heading'><h3 class='panel-title' data-bind='text: description'></h3></div>
+        <div class='panel-body'>
+          <div class='media'>
+            <div class='media-left'>
+              <img data-bind='attr: { src: imageName }' data-failover="/assets/img/placeholder.png" />
+            </div>
+            <div class='media-body'>
+              <div class='main-menu-item-description' data-bind='text: longDescription'></div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+      <!-- /ko -->
     </div><!-- /MENUS VIEW -->
 
     <!-- ORDER VIEW -->

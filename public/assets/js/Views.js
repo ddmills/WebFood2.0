@@ -29,6 +29,7 @@ function Views() {
   self.showMenu = function(id) {
     vm.Data.getMenu(id);
     self.show('menus');
+
   }
 
   /* show the current view */
